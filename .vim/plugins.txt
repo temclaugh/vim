@@ -1,0 +1,12 @@
+MatchTagAlways
+auto-pairs
+ctrlp.vim
+vim-commentary
+vim-easymotion
+vim-surround
+snipmate (ultisnips is probably better)
+
+
+pathogen.vim
+
+vim-over
