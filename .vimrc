@@ -56,13 +56,6 @@ nmap cw ciw
 nmap <Up> :<Up>
 nmap <Left> :bp<CR>
 nmap <Right> :bn<CR>
-map <cr> .
-"nmap <Leader>j <C-W>j
-"nmap <Leader>k <C-W>k
-"nmap <Leader>h <C-W>h
-"nmap <Leader>l <C-W>l
-map <C-Tab> :tabn<CR>
-map <C-S-Tab> :tabp<CR>
 
 " visual mappings
 
@@ -85,7 +78,7 @@ set foldmethod=manual
 nmap ; :
 map <leader>o :CtrlP<CR>
 nnoremap <leader>f :ls<CR>:b<Space>
-nmap <silent> <leader>/ :nohlsearch<CR>
+nmap <silent> <leader>/ :let@/ =""<CR>
 
 " copy and past "
 vnoremap <silent> y y`]
@@ -95,7 +88,6 @@ nnoremap <silent> p p`]
 " navigation mappings "
 nnoremap j gj
 nnoremap k gk
-nnoremap <CR> G
 
 nnoremap ciq ci"
 
@@ -138,7 +130,6 @@ if has("gui_running")
     set guitablabel=%M\ %t
 
     " no blinking cursor
-    " set guicursor+=a:block-lCursor/lCursor-blinkon0
     set guicursor+=a:lCursor/lCursor-blinkon0
     set guifont=Monaco:h14
 
@@ -159,7 +150,6 @@ au VimResized * exe "normal! \<c-w>="
 map <leader> <Plug>(easymotion-prefix)
 
 " silence annoying youcompleteme warnings
-
 let g:ycm_global_ycm_extra_conf='~..ycm_extra_conf.py'
 let g:ycm_show_diagnostics_ui=0
 
@@ -167,7 +157,7 @@ let g:ycm_show_diagnostics_ui=0
 " plugins
 """""""""""""""""""""""""""""""""""""""""""""""""
 
-call plug#begin('~/Dropbox/vim/plugged')
+call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
@@ -176,7 +166,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-complete' }
-Plug 'Shougo/unite.vim'
+Plug 'jpalardy/vim-slime'
 call plug#end()
 
 " airline options
@@ -188,6 +178,13 @@ set fillchars=vert:\ ,
 
 " easymotion options
 map <Leader> <Plug>(easymotion-prefix)
+
+" slime options
+let g:slime_target = "tmux"
+let g:slime_python_ipython = 1
+let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
+nmap <CR> <Plug>SlimeLineSend
+vmap <CR> <Plug>SlimeRegionSend
 
 " Highlight all instances of word under cursor, when idle.
 " Useful when studying strange source code.
