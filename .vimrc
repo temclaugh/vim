@@ -95,7 +95,7 @@ map <tab> %
 noremap ! :mksession! s <CR> :qall!<enter>
 noremap H ^
 noremap L $
-inoremap jk <ESC>
+" inoremap jk <ESC>
 vnoremap . :norm.<CR>
 set t_Co=256
 noremap <C-h> <C-w>h
