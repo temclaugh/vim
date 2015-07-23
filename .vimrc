@@ -45,7 +45,7 @@ set incsearch " do incremental searching
 set hlsearch
 set magic
 
-set wildignore=*.pyc,*.o,*~,*.zip,*.swp,*.so
+set wildignore+=*.pyc,*.o,*~,*.zip,*.swp,*.so,*/tmp/*
 set wildmenu
 set wildmode=full
 
@@ -148,6 +148,7 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
       \ --ignore .DS_Store
       \ --ignore "**/*.pyc"
       \ --ignore "dist/*"
+      \ --ignore "tmp/*"
       \ -g ""'
 
 au VimResized * exe "normal! \<c-w>="
