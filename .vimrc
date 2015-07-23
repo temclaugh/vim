@@ -24,6 +24,7 @@ set nowb
 set noswapfile
 set tabstop=2
 set shiftwidth=2
+set shiftround
 set softtabstop=2
 set expandtab
 set smartindent
@@ -44,7 +45,7 @@ set incsearch " do incremental searching
 set hlsearch
 set magic
 
-set wildignore=*.pyc,*.o,*~
+set wildignore=*.pyc,*.o,*~,*.zip,*.swp,*.so
 set wildmenu
 set wildmode=full
 
@@ -72,11 +73,13 @@ inoremap <C-U> <C-G>u<C-U>
 
 " paste with indentation formatted
 
+nmap ; :
+
 " leader mappings "
 let mapleader=" "
 set foldmethod=manual
-nmap ; :
 map <leader>o :CtrlP<CR>
+map <leader>d :bd<CR>
 nnoremap <leader>f :ls<CR>:b<Space>
 nmap <silent> <leader>/ :let@/ =""<CR>
 
@@ -104,7 +107,7 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <C-q> <C-w>q
 
-" imap {<CR> {<CR><BS>}<ESC>O
+imap {<CR> {<CR><BS>}<ESC>O
 
 " tab stuff
 try
@@ -114,9 +117,6 @@ catch
 endtry
 
 syntax enable
-
-" colorscheme PaperColor
-colorscheme atom-dark-256
 
 if has("gui_running")
     set guioptions-=T
@@ -140,14 +140,17 @@ endif
 "call togglebg#map("<F5>")
 
 let g:ctrlp_switch_buffer=0
-" let g:ctrlp_user_command='ag %s -l --nocolor --hidden -g ""'
-
-let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
+      \ --ignore .git
+      \ --ignore .svn
+      \ --ignore .hg
+      \ --ignore .DS_Store
+      \ --ignore "**/*.pyc"
+      \ --ignore "dist/*"
+      \ -g ""'
 
 au VimResized * exe "normal! \<c-w>="
-
-" EasyMotion "
-map <leader> <Plug>(easymotion-prefix)
 
 " silence annoying youcompleteme warnings
 let g:ycm_global_ycm_extra_conf='~..ycm_extra_conf.py'
@@ -167,6 +170,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-complete' }
 Plug 'jpalardy/vim-slime'
+Plug 'FelikZ/ctrlp-py-matcher'
 call plug#end()
 
 " airline options
@@ -208,3 +212,4 @@ vmap <CR> <Plug>SlimeRegionSend
 "   endif
 " endfunction
 " call AutoHighlightToggle()
+colorscheme tomorrow_night_eighties
